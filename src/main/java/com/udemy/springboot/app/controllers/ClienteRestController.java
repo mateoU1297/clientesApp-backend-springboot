@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.udemy.springboot.app.models.entity.Cliente;
 import com.udemy.springboot.app.models.services.IClienteService;
 
+import jakarta.validation.Valid;
+
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -59,7 +61,7 @@ public class ClienteRestController {
 	}
 
 	@PostMapping("/clientes")
-	public ResponseEntity<?> create(@RequestBody Cliente cliente, BindingResult result) {
+	public ResponseEntity<?> create(@Valid @RequestBody Cliente cliente, BindingResult result) {
 
 		Cliente clienteNew = null;
 		Map<String, Object> response = new HashMap<>();
@@ -88,7 +90,7 @@ public class ClienteRestController {
 	}
 
 	@PutMapping("/clientes/{id}")
-	public ResponseEntity<?> update(@RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
+	public ResponseEntity<?> update(@Valid @RequestBody Cliente cliente, BindingResult result, @PathVariable Long id) {
 
 		Cliente clienteActual = clienteService.findById(id);
 
